@@ -135,7 +135,6 @@ public class AdminController {
         if (courseById.isPresent()) {
             Courses course = courseById.get();
 
-            // Convertendo para DTO para evitar referências cíclicas
             List<StudentsDTO> studentsList = course.getStudents().stream()
                     .map(StudentsDTO::new)
                     .collect(Collectors.toList());
