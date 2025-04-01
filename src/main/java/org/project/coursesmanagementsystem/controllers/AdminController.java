@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin")
@@ -131,12 +132,19 @@ public class AdminController {
     public ResponseEntity<Iterable> listStudentsByCourse(@PathVariable(name = "courseId") Integer courseId) {
 
         Optional<Courses> courseById = this.coursesRepository.findById(courseId);
-        if(courseById.isPresent()) {}
-        Courses course = courseById.get();
+        if (courseById.isPresent()) {
+            Courses course = courseById.get();
 
-        Iterable<Students> studentsList = course.getStudents();
+            // Convertendo para DTO para evitar referências cíclicas
+            List<StudentsDTO> studentsList = course.getStudents().stream()
+                    .map(StudentsDTO::new)
+                    .collect(Collectors.toList());
 
-        return ResponseEntity.ok(studentsList);
+            return ResponseEntity.ok(studentsList);
+
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/enroll")

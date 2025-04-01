@@ -39,4 +39,35 @@ public class Students {
     )
     private List<Courses> courses = new ArrayList<>();
 
+    public Integer getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(Integer student_id) {
+        this.student_id = student_id;
+    }
+
+    public String getStudent_name() {
+        return student_name;
+    }
+
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
+    }
+
+    public Integer getStudent_age() {
+        return student_age;
+    }
+
+    public void setStudent_age(Integer student_age) {
+        this.student_age = student_age;
+    }
+
+    public List<Courses> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Courses> courses) {
+        this.courses = courses;
+    }
 }
